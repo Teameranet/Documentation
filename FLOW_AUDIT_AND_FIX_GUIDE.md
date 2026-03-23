@@ -644,38 +644,106 @@ PROMPT — Fix Visual Inconsistency (3 Blues, 3 Border Radii):
 In frontend/styles/App.css, add CSS custom properties at the :root level:
 
 :root {
-  /* Colors — single source of truth */
-  --color-primary:       #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-success:       #10b981;
-  --color-danger:        #ef4444;
-  --color-warning:       #f59e0b;
-  --color-text-primary:  #111827;
-  --color-text-secondary:#6b7280;
-  --color-bg-primary:    #ffffff;
-  --color-bg-secondary:  #f9fafb;
-  --color-border:        #e5e7eb;
-
-  /* Border radius system */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-
-  /* Spacing scale */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
+  /* ═══════════════════════════════════════════════════════════
+     COLOR SYSTEM — Single Source of Truth
+     ═══════════════════════════════════════════════════════════ */
+  
+  /* Primary Brand Colors */
+  --color-primary:        #4f46e5;  /* Indigo-600 — main brand color */
+  --color-primary-hover:  #4338ca;  /* Indigo-700 — hover state */
+  --color-primary-light:  #6366f1;  /* Indigo-500 — lighter variant */
+  --color-primary-bg:     #eef2ff;  /* Indigo-50 — background tint */
+  
+  /* Gradient System */
+  --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --gradient-header:  linear-gradient(to right, #6366f1, #8b5cf6);
+  
+  /* Semantic Colors */
+  --color-success:        #10b981;  /* Green-500 */
+  --color-success-bg:     #d1fae5;  /* Green-100 */
+  --color-danger:         #ef4444;  /* Red-500 */
+  --color-danger-bg:      #fee2e2;  /* Red-100 */
+  --color-warning:        #f59e0b;  /* Amber-500 */
+  --color-warning-bg:     #fef3c7;  /* Amber-100 */
+  --color-info:           #3b82f6;  /* Blue-500 */
+  --color-info-bg:        #dbeafe;  /* Blue-100 */
+  
+  /* Text Colors */
+  --color-text-primary:   #111827;  /* Gray-900 — headings */
+  --color-text-secondary: #6b7280;  /* Gray-500 — body text */
+  --color-text-tertiary:  #9ca3af;  /* Gray-400 — muted text */
+  
+  /* Background Colors */
+  --color-bg-primary:     #ffffff;  /* White — cards, modals */
+  --color-bg-secondary:   #f9fafb;  /* Gray-50 — page background */
+  --color-bg-tertiary:    #f3f4f6;  /* Gray-100 — input backgrounds */
+  
+  /* Border Colors */
+  --color-border-light:   #f3f4f6;  /* Gray-100 — subtle borders */
+  --color-border:         #e5e7eb;  /* Gray-200 — default borders */
+  --color-border-dark:    #d1d5db;  /* Gray-300 — strong borders */
+  
+  /* ═══════════════════════════════════════════════════════════
+     BORDER RADIUS SYSTEM
+     ═══════════════════════════════════════════════════════════ */
+  --radius-xs:  4px;   /* Tiny — tags, badges */
+  --radius-sm:  8px;   /* Small — buttons, inputs */
+  --radius-md:  12px;  /* Medium — cards, most components */
+  --radius-lg:  16px;  /* Large — modals, major sections */
+  --radius-xl:  20px;  /* Extra large — hero sections */
+  --radius-full: 9999px; /* Fully rounded — pills, avatars */
+  
+  /* ═══════════════════════════════════════════════════════════
+     SPACING SCALE
+     ═══════════════════════════════════════════════════════════ */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+  --space-3xl:  64px;
+  
+  /* ═══════════════════════════════════════════════════════════
+     SHADOW SYSTEM
+     ═══════════════════════════════════════════════════════════ */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md:  0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg:  0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl:  0 20px 25px rgba(0, 0, 0, 0.15);
 }
 
-Then do a global find-and-replace:
-  Replace all instances of #2563eb and #6366f1 with var(--color-primary)
-  Replace all instances of border-radius: 8px with var(--radius-sm)
-  Replace all instances of border-radius: 12px with var(--radius-md)
-  Replace all instances of border-radius: 16px with var(--radius-lg)
+Then do a GLOBAL find-and-replace across ALL CSS files:
+
+COLOR REPLACEMENTS:
+  Find: #2563eb  → Replace: var(--color-primary)
+  Find: #6366f1  → Replace: var(--color-primary-light)
+  Find: #4f46e5  → Replace: var(--color-primary)
+  Find: #10b981  → Replace: var(--color-success)
+  Find: #ef4444  → Replace: var(--color-danger)
+  Find: #f59e0b  → Replace: var(--color-warning)
+  Find: #3b82f6  → Replace: var(--color-info)
+  Find: #6b7280  → Replace: var(--color-text-secondary)
+  Find: #9ca3af  → Replace: var(--color-text-tertiary)
+  Find: #f9fafb  → Replace: var(--color-bg-secondary)
+  Find: #f3f4f6  → Replace: var(--color-bg-tertiary)
+  Find: #e5e7eb  → Replace: var(--color-border)
+
+BORDER RADIUS REPLACEMENTS:
+  Find: border-radius: 6px   → Replace: border-radius: var(--radius-sm)
+  Find: border-radius: 8px   → Replace: border-radius: var(--radius-sm)
+  Find: border-radius: 10px  → Replace: border-radius: var(--radius-md)
+  Find: border-radius: 12px  → Replace: border-radius: var(--radius-md)
+  Find: border-radius: 16px  → Replace: border-radius: var(--radius-lg)
+  Find: border-radius: 20px  → Replace: border-radius: var(--radius-xl)
+
+GRADIENT REPLACEMENTS:
+  Find: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)
+    → Replace: var(--gradient-primary)
+  Find: linear-gradient(to right, #6366f1, #8b5cf6)
+    → Replace: var(--gradient-header)
+
+After replacement, verify in browser that all colors render correctly.
 ```
 
 ### Loading States
@@ -736,7 +804,6 @@ Apply these changes to ALL modal components:
 5. Add aria-label to all icon-only buttons (bookmark, share, edit, delete, close X buttons).
    Example: <button aria-label="Close modal" onClick={onClose}><X size={20} /></button>
 ```
-
 
 ---
 
